@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Alumni Connect</title>
+    <link rel="stylesheet" href="styles/admin-dashboard.css">
+    <link rel="stylesheet" href="styles/admin-modals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <p id="adminName"></p>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-section="dashboard">
+                    <a href="#"><i class="fas fa-chart-line"></i> Dashboard</a>
+                </li>
+                <li data-section="users">
+                    <a href="#"><i class="fas fa-users"></i> Users</a>
+                </li>
+                <li data-section="events">
+                    <a href="#"><i class="fas fa-calendar"></i> Events</a>
+                </li>
+                <li data-section="opportunities">
+                    <a href="#"><i class="fas fa-briefcase"></i> Opportunities</a>
+                </li>
+                <li data-section="reports">
+                    <a href="#"><i class="fas fa-chart-bar"></i> Reports</a>
+                </li>
+                <li data-section="settings">
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                </li>
+                <li>
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="top-bar-right">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="admin-profile">
+                        <img src="image/admin-avatar.jpg" alt="Admin" id="adminAvatar">
+                        <span id="adminUsername"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Overview -->
+            <div class="content-section active" id="dashboard">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3>Total Users</h3>
+                            <p id="totalUsers">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-user-graduate"></i>
+                        <div class="stat-info">
+                            <h3>Alumni</h3>
+                            <p id="totalAlumni">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-user-friends"></i>
+                        <div class="stat-info">
+                            <h3>Students</h3>
+                            <p id="totalStudents">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <div class="stat-info">
+                            <h3>Active Events</h3>
+                            <p id="activeEvents">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h3>User Growth</h3>
+                        <canvas id="userGrowthChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Event Participation</h3>
+                        <canvas id="eventParticipationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div class="content-section" id="users">
+                <div class="section-header">
+                    <h2>User Management</h2>
+                    <button class="btn-primary" id="addUserBtn">
+                        <i class="fas fa-plus"></i> Add User
+                    </button>
+                </div>
+                <div class="users-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- User rows will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Events Section -->
+            <div class="content-section" id="events">
+                <div class="section-header">
+                    <h2>Event Management</h2>
+                    <button class="btn-primary" id="addEventBtn">
+                        <i class="fas fa-plus"></i> Create Event
+                    </button>
+                </div>
+                <div class="events-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Event Name</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventsTableBody">
+                            <!-- Event rows will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Opportunities Section -->
+            <div class="content-section" id="opportunities">
+                <div class="section-header">
+                    <h2>Opportunity Management</h2>
+                    <button class="btn-primary" id="addOpportunityBtn">
+                        <i class="fas fa-plus"></i> Create Opportunity
+                    </button>
+                </div>
+                <div class="opportunities-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Company</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="opportunitiesTableBody">
+                            <!-- Opportunity rows will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div class="content-section" id="reports">
+                <div class="section-header">
+                    <h2>Reports</h2>
+                    <button class="btn-primary" id="generateReportBtn">
+                        <i class="fas fa-file-download"></i> Generate Report
+                    </button>
+                </div>
+                <div class="reports-list">
+                    <div class="report-filters">
+                        <select id="reportType">
+                            <option value="users">Users Report</option>
+                            <option value="events">Events Report</option>
+                            <option value="opportunities">Opportunities Report</option>
+                        </select>
+                        <input type="date" id="reportStartDate">
+                        <input type="date" id="reportEndDate">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="content-section" id="settings">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+                <div class="settings-form">
+                    <form id="settingsForm">
+                        <div class="form-group">
+                            <label>Email Notifications</label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="notifyNewUsers"> 
+                                <label for="notifyNewUsers">New User Registrations</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="notifyNewEvents">
+                                <label for="notifyNewEvents">New Event Creation</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Save Settings</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="addUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New User</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label for="userName">Full Name</label>
+                    <input type="text" id="userName" name="userName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" id="userEmail" name="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="userType">User Type</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">Select Type</option>
+                        <option value="student">Student</option>
+                        <option value="alumni">Alumni</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('addUserModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="addEventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Event</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="addEventForm">
+                <div class="form-group">
+                    <label for="eventTitle">Event Title</label>
+                    <input type="text" id="eventTitle" name="eventTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Date</label>
+                    <input type="datetime-local" id="eventDate" name="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventLocation">Location</label>
+                    <input type="text" id="eventLocation" name="eventLocation" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Description</label>
+                    <textarea id="eventDescription" name="eventDescription" rows="4" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('addEventModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="addOpportunityModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Opportunity</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="addOpportunityForm">
+                <div class="form-group">
+                    <label for="opportunityTitle">Title</label>
+                    <input type="text" id="opportunityTitle" name="opportunityTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="opportunityType">Type</label>
+                    <select id="opportunityType" name="opportunityType" required>
+                        <option value="">Select Type</option>
+                        <option value="job">Job</option>
+                        <option value="internship">Internship</option>
+                        <option value="volunteer">Volunteer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="opportunityCompany">Company</label>
+                    <input type="text" id="opportunityCompany" name="opportunityCompany" required>
+                </div>
+                <div class="form-group">
+                    <label for="opportunityDescription">Description</label>
+                    <textarea id="opportunityDescription" name="opportunityDescription" rows="4" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('addOpportunityModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Opportunity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script/admin-dashboard.js"></script>
+</body>
+</html>

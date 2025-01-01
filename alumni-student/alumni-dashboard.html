@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Dashboard - Alumni Connect</title>
+    <link rel="stylesheet" href="styles/alumni-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="script/section-handler.js" defer></script>
+    <script src="script/alumni-dashboard.js" defer></script>
+    <script src="scripts/modal-handler.js" defer></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="images/default-avatar.png" alt="Profile Picture">
+                    <div class="image-upload">
+                        <label for="profileImageInput">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                        <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h3 id="sidebarName"></h3>
+                    <p id="sidebarRole"></p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-section="overview">
+                    <a href="#"><i class="fas fa-home"></i> Overview</a>
+                </li>
+                <li data-section="profile">
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                </li>
+                <li data-section="connections">
+                    <a href="#"><i class="fas fa-users"></i> Connections</a>
+                </li>
+                <li data-section="mentorship">
+                    <a href="#"><i class="fas fa-user-graduate"></i> Mentorship</a>
+                </li>
+                <li data-section="events">
+                    <a href="#"><i class="fas fa-calendar"></i> Events</a>
+                </li>
+                <li data-section="resources">
+                    <a href="#"><i class="fas fa-book"></i> Resources</a>
+                </li>
+                <li data-section="messages">
+                    <a href="#"><i class="fas fa-envelope"></i> Messages</a>
+                </li>
+                <li data-section="opportunities">
+                    <a href="#"><i class="fas fa-briefcase"></i> Opportunities</a>
+                </li>
+                <li>
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="top-bar-right">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <div class="welcome-banner">
+                    <h2>Welcome Back, <span id="welcomeName">Alumni</span>!</h2>
+                    <p>Continue making an impact in students' lives</p>
+                </div>
+
+                <!-- Impact Stats -->
+                <div class="impact-stats">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>Active Mentees</h4>
+                                <p>3</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>Upcoming Events</h4>
+                                <p>5</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>Total Mentorships</h4>
+                                <p>12</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>Rating</h4>
+                                <p>4.8</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="section-header">
+                    <h3>Recent Activity</h3>
+                </div>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon mentorship">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h4>New Mentorship Request</h4>
+                            <p>Sarah Johnson - Computer Science</p>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                        <div class="activity-actions">
+                            <button class="btn-accept">Accept</button>
+                            <button class="btn-decline">Decline</button>
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon event">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h4>Career Workshop</h4>
+                            <p>You're scheduled to speak</p>
+                            <span class="time">Tomorrow, 2:00 PM</span>
+                        </div>
+                        <div class="activity-actions">
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="content-section">
+                <div class="section-header">
+                    <h3>Professional Profile</h3>
+                    <button class="btn-primary" id="editProfileBtn">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+                <div class="profile-grid">
+                    <div class="profile-card main-info">
+                        <h4>Personal Information</h4>
+                        <div class="info-group">
+                            <label>Full Name</label>
+                            <p id="fullName"></p>
+                        </div>
+                        <div class="info-group">
+                            <label>Current Role</label>
+                            <p id="currentRole"></p>
+                        </div>
+                        <div class="info-group">
+                            <label>Company</label>
+                            <p id="company"></p>
+                        </div>
+                    </div>
+
+                    <div class="profile-card contact">
+                        <h4>Contact Information</h4>
+                        <div class="info-group">
+                            <label>Email</label>
+                            <p id="email"></p>
+                        </div>
+                        <div class="info-group">
+                            <label>Phone</label>
+                            <p id="phone"></p>
+                        </div>
+                        <div class="info-group">
+                            <label>Location</label>
+                            <p id="location"></p>
+                        </div>
+                    </div>
+
+                    <div class="profile-card expertise">
+                        <h4>Areas of Expertise</h4>
+                        <div class="tags" id="expertiseTags"></div>
+                    </div>
+
+                    <div class="profile-card interests">
+                        <h4>Professional Interests</h4>
+                        <div class="tags" id="interestsTags"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mentorship Section -->
+            <section id="mentorship" class="content-section">
+                <div class="section-header">
+                    <h3>Mentorship Dashboard</h3>
+                    <div class="header-actions">
+                        <select class="status-filter">
+                            <option value="all">All Mentees</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mentorship-grid">
+                    <div class="mentee-card active">
+                        <div class="mentee-header">
+                            <div class="mentee-info">
+                                <h4>Alex Johnson</h4>
+                                <p>Computer Science, Year 3</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="mentee-progress">
+                            <div class="progress-item">
+                                <span class="label">Sessions Completed</span>
+                                <span class="value">4/8</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        <div class="mentee-actions">
+                            <button class="btn-schedule">Schedule Session</button>
+                            <button class="btn-message">Message</button>
+                        </div>
+                    </div>
+                    <!-- Add more mentee cards as needed -->
+                </div>
+            </section>
+
+            <!-- Events Section -->
+            <section id="events" class="content-section">
+                <div class="section-header">
+                    <h3>Events & Workshops</h3>
+                    <button class="btn-primary btn-create-event" id="createEventBtn">
+                        <i class="fas fa-plus"></i> Create Event
+                    </button>
+                </div>
+                <div class="events-container" id="eventsContainer">
+                    <!-- Events will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Opportunities Section -->
+            <section id="opportunities" class="content-section">
+                <div class="section-header">
+                    <h3>Opportunities</h3>
+                    <button class="btn-primary btn-share-opportunity" id="shareOpportunityBtn">
+                        <i class="fas fa-plus"></i> Share Opportunity
+                    </button>
+                </div>
+                <div class="opportunities-container" id="opportunitiesContainer">
+                    <!-- Opportunities will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources" class="content-section">
+                <div class="section-header">
+                    <h3>Shared Resources</h3>
+                    <button class="btn-primary">
+                        <i class="fas fa-upload"></i> Share Resource
+                    </button>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="resource-info">
+                            <h4>Career Development Guide</h4>
+                            <p>Comprehensive guide for tech careers</p>
+                            <div class="resource-meta">
+                                <span><i class="fas fa-download"></i> 128</span>
+                                <span><i class="fas fa-star"></i> 4.5</span>
+                            </div>
+                        </div>
+                        <div class="resource-actions">
+                            <button class="btn-download">Download</button>
+                            <button class="btn-share">Share</button>
+                        </div>
+                    </div>
+                    <!-- Add more resource cards as needed -->
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages" class="content-section">
+                <div class="messages-container">
+                    <div class="chat-list">
+                        <div class="chat-list-header">
+                            <h3>Conversations</h3>
+                            <button class="btn-primary" id="newMessageBtn">
+                                <i class="fas fa-plus"></i> New Message
+                            </button>
+                        </div>
+                        <div class="chat-search">
+                            <input type="text" placeholder="Search messages..." id="messageSearch">
+                        </div>
+                        <div id="chatList">
+                            <!-- Chat list will be dynamically loaded here -->
+                            <div class="loading-placeholder">Loading conversations...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-content">
+                        <div id="chatHeader" class="chat-header">
+                            <div class="chat-user-info">
+                                <img src="image/default-avatar.jpg" alt="User" id="chatUserImage">
+                                <div class="user-details">
+                                    <h4 id="chatUserName">Select a conversation</h4>
+                                    <p id="chatUserStatus"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="messagesList" class="messages-list">
+                            <!-- Messages will be dynamically loaded here -->
+                        </div>
+                        
+                        <div class="message-input">
+                            <textarea id="messageInput" placeholder="Type a message..." disabled></textarea>
+                            <button class="send-button" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="createEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Event</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createEventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">Event Title</label>
+                        <input type="text" id="eventTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDate">Date and Time</label>
+                        <input type="datetime-local" id="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventLocation">Location</label>
+                        <input type="text" id="eventLocation" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventType">Event Type</label>
+                        <select id="eventType" required>
+                            <option value="networking">Networking</option>
+                            <option value="workshop">Workshop</option>
+                            <option value="seminar">Seminar</option>
+                            <option value="conference">Conference</option>
+                            <option value="social">Social Gathering</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Description</label>
+                        <textarea id="eventDescription" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Create Event</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="shareOpportunityModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Opportunity</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="shareOpportunityForm">
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" id="jobTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobLocation">Location</label>
+                        <input type="text" id="jobLocation" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobType">Job Type</label>
+                        <select id="jobType" required>
+                            <option value="full-time">Full Time</option>
+                            <option value="part-time">Part Time</option>
+                            <option value="internship">Internship</option>
+                            <option value="contract">Contract</option>
+                            <option value="freelance">Freelance</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="requiredSkills">Required Skills (comma-separated)</label>
+                        <input type="text" id="requiredSkills" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobDescription">Description</label>
+                        <textarea id="jobDescription" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Share Opportunity</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Profile</h3>
+                <button type="button" class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm">
+                    <div class="profile-image-upload">
+                        <img id="profileImage" src="images/default-avatar.png" alt="Profile Picture">
+                        <div class="image-upload">
+                            <label for="profileImageInput">
+                                <i class="fas fa-camera"></i> Change Photo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editName">Full Name</label>
+                        <input type="text" id="editName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editRole">Current Role</label>
+                        <input type="text" id="editRole" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCompany">Company</label>
+                        <input type="text" id="editCompany">
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email</label>
+                        <input type="email" id="editEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhone">Phone</label>
+                        <input type="tel" id="editPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="editLocation">Location</label>
+                        <input type="text" id="editLocation">
+                    </div>
+                    <div class="form-group">
+                        <label for="editExpertise">Areas of Expertise (comma-separated)</label>
+                        <input type="text" id="editExpertise">
+                    </div>
+                    <div class="form-group">
+                        <label for="editInterests">Professional Interests (comma-separated)</label>
+                        <input type="text" id="editInterests">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                        <button type="button" class="btn-secondary close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="newMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Message</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-contacts">
+                    <input type="text" placeholder="Search your network..." id="contactSearch">
+                </div>
+                <div class="contacts-list" id="contactsList">
+                    <!-- Contacts will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Management Modal -->
+    <div id="manageEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Manage Event</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="event-management-options">
+                    <div class="event-details-section">
+                        <h4>Event Details</h4>
+                        <div id="manageEventDetails"></div>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn-primary" id="editEventBtn">
+                            <i class="fas fa-edit"></i> Edit Event
+                        </button>
+                        <button class="btn-secondary" id="viewAttendeesBtn">
+                            <i class="fas fa-users"></i> View Attendees
+                        </button>
+                        <button class="btn-secondary" id="sendRemindersBtn">
+                            <i class="fas fa-bell"></i> Send Reminders
+                        </button>
+                        <button class="btn-danger" id="cancelEventBtn">
+                            <i class="fas fa-times"></i> Cancel Event
+                        </button>
+                    </div>
+                    <div id="attendeesList" class="attendees-section" style="display: none;">
+                        <h4>Registered Attendees</h4>
+                        <div class="attendees-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opportunity Management Modal -->
+    <div id="manageOpportunityModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Manage Opportunity</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="opportunity-management-options">
+                    <div class="opportunity-details-section">
+                        <h4>Opportunity Details</h4>
+                        <div id="manageOpportunityDetails"></div>
+                    </div>
+                    <div class="opportunity-actions">
+                        <button class="btn-primary" id="editOpportunityBtn">
+                            <i class="fas fa-edit"></i> Edit Opportunity
+                        </button>
+                        <button class="btn-secondary" id="viewApplicationsBtn">
+                            <i class="fas fa-users"></i> View Applications
+                        </button>
+                        <button class="btn-danger" id="closeOpportunityBtn">
+                            <i class="fas fa-times"></i> Close Opportunity
+                        </button>
+                    </div>
+                    <div id="applicationsList" class="applications-section" style="display: none;">
+                        <h4>Applications Received</h4>
+                        <div class="applications-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script/section-handler.js"></script>
+    <script src="script/messages-handler.js"></script>
+    <script src="script/alumni-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Alumni Connect</title>
+    <link rel="stylesheet" href="styles/student-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="image/default-avatar.jpg" alt="Profile Image" id="profileImage">
+                    <div class="edit-overlay">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <h3 id="studentName">Loading...</h3>
+                <p id="studentDetails">Loading...</p>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-section="overview">
+                    <a href="#"><i class="fas fa-home"></i> Overview</a>
+                </li>
+                <li data-section="profile">
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                </li>
+                <li data-section="network">
+                    <a href="#"><i class="fas fa-users"></i> Network</a>
+                </li>
+                <li data-section="opportunities">
+                    <a href="#"><i class="fas fa-briefcase"></i> Opportunities</a>
+                </li>
+                <li data-section="events">
+                    <a href="#"><i class="fas fa-calendar"></i> Events</a>
+                </li>
+                <li data-section="messages">
+                    <a href="#"><i class="fas fa-envelope"></i> Messages</a>
+                </li>
+                <li>
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="top-bar-right">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <div class="welcome-banner">
+                    <h2>Welcome Back, <span id="welcomeName">Student</span>!</h2>
+                    <p>Here's what's happening in your network</p>
+                </div>
+
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-alt"></i> Upcoming Events</h3>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="card-content" id="upcomingEvents">
+                            <!-- Events will be dynamically loaded here -->
+                            <div class="loading-placeholder">Loading events...</div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-briefcase"></i> Latest Opportunities</h3>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="card-content" id="latestOpportunities">
+                            <!-- Opportunities will be dynamically loaded here -->
+                            <div class="loading-placeholder">Loading opportunities...</div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-users"></i> Network Updates</h3>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="card-content" id="networkUpdates">
+                            <!-- Network updates will be dynamically loaded here -->
+                            <div class="loading-placeholder">Loading updates...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="content-section">
+                <div class="section-header">
+                    <h2>My Profile</h2>
+                    <button class="btn-primary" id="editProfileBtn">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+                
+                <div class="profile-content">
+                    <div class="profile-info">
+                        <div class="info-group">
+                            <label>Full Name</label>
+                            <p id="fullName" class="info-value">Loading...</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Student ID</label>
+                            <p id="studentId" class="info-value">Loading...</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Department</label>
+                            <p id="department" class="info-value">Loading...</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Year of Study</label>
+                            <p id="yearOfStudy" class="info-value">Loading...</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Email</label>
+                            <p id="email" class="info-value">Loading...</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-skills">
+                        <h3>Skills</h3>
+                        <div class="add-skill">
+                            <input type="text" id="newSkillInput" placeholder="Add a new skill">
+                            <button id="addSkillBtn" class="btn-secondary">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div id="skillsList" class="skills-list">
+                            <!-- Skills will be dynamically loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Network Section -->
+            <section id="network" class="content-section">
+                <div class="section-header">
+                    <h2>My Network</h2>
+                    <div class="network-filters">
+                        <select id="connectionType">
+                            <option value="all">All Connections</option>
+                            <option value="alumni">Alumni</option>
+                            <option value="students">Students</option>
+                        </select>
+                        <input type="text" placeholder="Search connections..." id="networkSearch">
+                    </div>
+                </div>
+                
+                <div class="network-grid" id="connectionsGrid">
+                    <!-- Connections will be dynamically loaded here -->
+                    <div class="loading-placeholder">Loading connections...</div>
+                </div>
+                
+                <div class="pagination" id="networkPagination">
+                    <!-- Pagination will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- Opportunities Section -->
+            <section id="opportunities" class="content-section">
+                <div class="section-header">
+                    <h2>Opportunities</h2>
+                    <div class="opportunity-filters">
+                        <select id="opportunityType">
+                            <option value="all">All Types</option>
+                            <option value="internship">Internships</option>
+                            <option value="job">Jobs</option>
+                            <option value="project">Projects</option>
+                        </select>
+                        <input type="text" placeholder="Search opportunities..." id="opportunitySearch">
+                    </div>
+                </div>
+                
+                <div class="opportunities-grid" id="opportunitiesGrid">
+                    <!-- Opportunities will be dynamically loaded here -->
+                    <div class="loading-placeholder">Loading opportunities...</div>
+                </div>
+                
+                <div class="pagination" id="opportunitiesPagination">
+                    <!-- Pagination will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- Events Section -->
+            <section id="events" class="content-section">
+                <div class="section-header">
+                    <h2>Events</h2>
+                    <div class="event-filters">
+                        <select id="eventType">
+                            <option value="all">All Events</option>
+                            <option value="workshop">Workshops</option>
+                            <option value="seminar">Seminars</option>
+                            <option value="networking">Networking</option>
+                        </select>
+                        <input type="text" placeholder="Search events..." id="eventSearch">
+                    </div>
+                </div>
+                
+                <div class="events-grid" id="eventsGrid">
+                    <!-- Events will be dynamically loaded here -->
+                    <div class="loading-placeholder">Loading events...</div>
+                </div>
+                
+                <div class="pagination" id="eventsPagination">
+                    <!-- Pagination will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages" class="content-section">
+                <div class="messages-container">
+                    <div class="chat-list">
+                        <div class="chat-list-header">
+                            <h3>Conversations</h3>
+                            <button class="btn-primary" id="newMessageBtn">
+                                <i class="fas fa-plus"></i> New Message
+                            </button>
+                        </div>
+                        <div class="chat-search">
+                            <input type="text" placeholder="Search messages..." id="messageSearch">
+                        </div>
+                        <div id="chatList">
+                            <!-- Chat list will be dynamically loaded here -->
+                            <div class="loading-placeholder">Loading conversations...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-content">
+                        <div id="chatHeader" class="chat-header">
+                            <div class="chat-user-info">
+                                <img src="image/default-avatar.jpg" alt="User" id="chatUserImage">
+                                <div class="user-details">
+                                    <h4 id="chatUserName">Select a conversation</h4>
+                                    <p id="chatUserStatus"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="messagesList" class="messages-list">
+                            <!-- Messages will be dynamically loaded here -->
+                        </div>
+                        
+                        <div class="message-input">
+                            <textarea id="messageInput" placeholder="Type a message..." disabled></textarea>
+                            <button class="send-button" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editName">Full Name</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editStudentId">Student ID</label>
+                    <input type="text" id="editStudentId" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDepartment">Department</label>
+                    <input type="text" id="editDepartment" required>
+                </div>
+                <div class="form-group">
+                    <label for="editYearOfStudy">Year of Study</label>
+                    <input type="text" id="editYearOfStudy" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editSkills">Skills (comma-separated)</label>
+                    <input type="text" id="editSkills" placeholder="e.g., JavaScript, Python, React">
+                </div>
+                <div class="form-group">
+                    <label for="editInterests">Interests (comma-separated)</label>
+                    <input type="text" id="editInterests" placeholder="e.g., Web Development, AI, Data Science">
+                </div>
+                <button type="submit" class="btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="messageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>New Message</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label for="messageRecipient">Recipient</label>
+                    <select id="messageRecipient" required>
+                        <option value="">Select recipient...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="messageSubject">Subject</label>
+                    <input type="text" id="messageSubject" required>
+                </div>
+                <div class="form-group">
+                    <label for="messageContent">Message</label>
+                    <textarea id="messageContent" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/student-dashboard.js"></script>
+</body>
+</html>
