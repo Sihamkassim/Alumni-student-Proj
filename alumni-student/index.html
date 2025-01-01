@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-Alumni Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader">
+            <div class="circle-container">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="loading-text">Welcome to Alumni Connect</div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                AlumniConnect
+            </div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#connect">Connect</a>
+                <a href="login.html" class="nav-login">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Connect. Learn. Grow.</h1>
+                <p>Bridge the gap between students and alumni. Share experiences, build networks, and create opportunities together.</p>
+                <div class="cta-buttons">
+                    <a href="signup.html" class="cta-button">Join Our Community</a>
+                    <a href="login.html" class="cta-button secondary">Already a Member?</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="image/ourproj.jpg" alt="Networking" class="floating-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">Why Join Us?</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <i class="fas fa-network-wired card-icon"></i>
+                <h3>Network Growth</h3>
+                <p>Connect with successful alumni and fellow students to expand your professional network.</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-users card-icon"></i>
+                <h3>Mentorship</h3>
+                <p>Get guidance from experienced alumni who've walked your path.</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-briefcase card-icon"></i>
+                <h3>Opportunities</h3>
+                <p>Access exclusive job postings, internships, and collaborative projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="connect" class="section connect-section">
+        <h2 class="section-title">Connect With Alumni</h2>
+        <div class="connect-container">
+            <div class="connect-grid">
+                <div class="connect-card">
+                    <i class="fas fa-comments card-icon"></i>
+                    <h3>Start Conversations</h3>
+                    <p>Engage in meaningful discussions with alumni who share your interests and career goals.</p>
+                </div>
+                <div class="connect-card">
+                    <i class="fas fa-lightbulb card-icon"></i>
+                    <h3>Get Industry Insights</h3>
+                    <p>Learn about different career paths and get valuable industry perspectives from experienced professionals.</p>
+                </div>
+                <div class="connect-card">
+                    <i class="fas fa-handshake card-icon"></i>
+                    <h3>Build Relationships</h3>
+                    <p>Create lasting professional connections that can help guide your career journey.</p>
+                </div>
+            </div>
+            <div class="connect-cta">
+                <p>Ready to expand your professional network?</p>
+                <a href="signup.html" class="button-primary">Start Connecting Today</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#connect">Connect</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@alumniconnect.com</li>
+                    <li><i class="fas fa-phone"></i> =251 911 377 169</li>
+                    <li><i class="fas fa-map-marker-alt"></i> ASTU , Adama </li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Alumni Connect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Screen Animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.querySelector('.loading-screen').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
