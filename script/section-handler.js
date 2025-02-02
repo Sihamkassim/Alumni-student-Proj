@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle navigation
+    
     const navLinks = document.querySelectorAll('.nav-links li[data-section]');
     const sections = document.querySelectorAll('.content-section');
 
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close modal when clicking outside
+    // Close modal when clicked outside
     modals.forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
