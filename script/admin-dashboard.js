@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(modalId).style.display = 'none';
     }
 
-    // Add event listeners for buttons
+  
     document.getElementById('addUserBtn').addEventListener('click', function() {
         openModal('addUserModal');
     });
